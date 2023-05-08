@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hiv_tracker/screens/sign_up_page.dart';
 
 class Start extends StatefulWidget {
   const Start({Key? key}) : super(key: key);
@@ -59,7 +60,12 @@ class _StartState extends State<Start> {
                             borderRadius: BorderRadius.circular(30.0),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const SignUp()),
+                          );
+                        },
                         child: const Text(
                           'Get started!',
                           style: TextStyle(
