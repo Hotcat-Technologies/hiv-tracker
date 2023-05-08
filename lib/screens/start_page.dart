@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hiv_tracker/screens/sign_up_page.dart';
 
+import '../common/constants.dart';
+
 class Start extends StatefulWidget {
   const Start({Key? key}) : super(key: key);
 
@@ -13,7 +15,7 @@ class _StartState extends State<Start> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue,
+      backgroundColor: backgroundColor,
       appBar: AppBar(
         title: const Text(
           'ILIVE+',
@@ -30,7 +32,7 @@ class _StartState extends State<Start> {
           child: Column(
             children: [
               Container(
-                width: 300,
+                width: headerWidth,
                 margin: const EdgeInsets.all(20),
                 child: Column(
                   children: const [

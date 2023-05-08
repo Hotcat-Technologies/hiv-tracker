@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hiv_tracker/screens/welcome_page.dart';
+
+import '../common/constants.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -12,7 +15,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue,
+      backgroundColor: backgroundColor,
       appBar: AppBar(
         title: const Text(
           'ILIVE+',
@@ -29,7 +32,7 @@ class _SignUpState extends State<SignUp> {
           child: Column(
             children: [
               Container(
-                width: 300,
+                width: headerWidth,
                 height: 160,
                 margin: const EdgeInsets.all(20),
                 child: Column(
@@ -37,11 +40,7 @@ class _SignUpState extends State<SignUp> {
                     Text(
                       'Connect with the community that cares',
                       // textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 32,
-                          fontWeight: FontWeight.bold
-                      ),
+                      style: headerStyle,
                     ),
                   ],
                 ),
@@ -56,15 +55,15 @@ class _SignUpState extends State<SignUp> {
                         TextField(
                           decoration: InputDecoration(
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white, width: 2.0),
+                              borderSide: textFieldStyle,
                             ),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white, width: 2.0),
+                              borderSide: textFieldStyle,
                             ),
                             hintText: 'Username',
-                            hintStyle: TextStyle(color: Colors.white),
+                            hintStyle: textFieldColor,
                           ),
-                          style: TextStyle(color: Colors.white),
+                          style: textFieldColor,
                         ),
                       ],
                     ),
@@ -82,15 +81,15 @@ class _SignUpState extends State<SignUp> {
                           obscureText: true,
                           decoration: InputDecoration(
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white, width: 2.0),
+                              borderSide: textFieldStyle,
                             ),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white, width: 2.0),
+                              borderSide: textFieldStyle,
                             ),
                             hintText: 'Password',
-                            hintStyle: TextStyle(color: Colors.white),
+                            hintStyle: textFieldColor,
                           ),
-                          style: TextStyle(color: Colors.white),
+                          style: textFieldColor,
                         ),
                       ],
                     ),
@@ -112,7 +111,10 @@ class _SignUpState extends State<SignUp> {
                           ),
                         ),
                         onPressed: () {
-                          const SignUp();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const Welcome()),
+                          );
                         },
                         child: const Text(
                           'Sign Up',
