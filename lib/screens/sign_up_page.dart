@@ -19,10 +19,7 @@ class _SignUpState extends State<SignUp> {
       appBar: AppBar(
         title: const Text(
           'ILIVE+',
-          style: TextStyle(
-            fontWeight: FontWeight.normal,
-            color: Colors.white,
-          ),
+          style: appBarText,
         ),
         elevation: 0,
       ),

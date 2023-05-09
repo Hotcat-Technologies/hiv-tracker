@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hiv_tracker/common/constants.dart';
+import 'package:hiv_tracker/screens/healthcare_contacts_page.dart';
 
 class Welcome extends StatefulWidget {
   const Welcome({Key? key}) : super(key: key);
@@ -127,7 +128,10 @@ class _WelcomeState extends State<Welcome> {
                           ),
                         ),
                         onPressed: () {
-
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const HealthcareContacts()),
+                          );
                         },
                         child: const Text(
                           'Help is One Tap Away',

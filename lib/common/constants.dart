@@ -9,6 +9,12 @@ const headerStyle = TextStyle(
     fontSize: 32,
     fontWeight: FontWeight.bold
 );
+const contactsBoxText = TextStyle(
+    color: Colors.black,
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+);
+const contactsBoxWidth = 200.0;
 const headerWidth = 300.0;
 const textFieldStyle = BorderSide(color: Colors.white, width: 2.0);
 const textFieldColor = TextStyle(color: Colors.white);
