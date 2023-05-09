@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hiv_tracker/common/constants.dart';
+import 'package:hiv_tracker/screens/explore_articles_page.dart';
 import 'package:hiv_tracker/screens/healthcare_contacts_page.dart';
 
 class Welcome extends StatefulWidget {
@@ -98,7 +99,10 @@ class _WelcomeState extends State<Welcome> {
                           ),
                         ),
                         onPressed: () {
-
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const ExploreArticles()),
+                          );
                         },
                         child: const Text(
                           'Read articles!',
