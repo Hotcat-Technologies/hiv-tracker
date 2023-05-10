@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import '../common/constants.dart';
-import 'explore_articles_view.dart';
 
 class ExploreArticles extends StatefulWidget {
   const ExploreArticles({Key? key}) : super(key: key);
@@ -16,6 +15,13 @@ class ExploreArticles extends StatefulWidget {
 
 class _ExploreArticlesState extends State<ExploreArticles> {
   List<dynamic> articles = [];
+
+  @override
+  initState() {
+    super.initState();
+    apiCalling();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +62,9 @@ class _ExploreArticlesState extends State<ExploreArticles> {
                           onTap: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => const ExploreArticlesView()),
+                              MaterialPageRoute(
+                                builder: (context) => ArticlesView(todo: articles[index]),
+                              ),
                             );
                           },
                         )
@@ -68,20 +76,10 @@ class _ExploreArticlesState extends State<ExploreArticles> {
           }
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          apiCalling();
-        },
-        child: const Icon(
-          Icons.update,
-          size: 30,
-        ),
-      ),
     );
   }
   void apiCalling () async {
-    print('api calling');
-    const url = 'https://newsapi.org/v2/everything?q=tesla&from=2023-04-09&sortBy=publishedAt&apiKey=91da813482064ba89a97c1258cb20e5a';
+    const url = 'https://newsapi.org/v2/everything?q=apple&from=2023-05-09&to=2023-05-09&sortBy=popularity&apiKey=91da813482064ba89a97c1258cb20e5a';
     final uri = Uri.parse(url);
     final response = await http.get(uri);
     final body = response.body;
@@ -92,9 +90,66 @@ class _ExploreArticlesState extends State<ExploreArticles> {
   }
 }
 
-class Todo {
-  final String title;
-  final String description;
+class ArticlesView extends StatelessWidget {
 
-  const Todo(this.title, this.description);
+  const ArticlesView({super.key, required this.todo});
+
+  final dynamic todo;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: backgroundColor,
+      appBar: AppBar(
+        title: const Text(
+          'Explore Articles',
+          style: appBarText,
+        ),
+        elevation: 0,
+        backgroundColor: Colors.indigo,
+      ),
+      body: Column(
+        children: [
+          Center(
+            child: Column(
+              children: [
+                Center(
+                  child: Container(
+                    height: 180,
+                    margin: const EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: const Color(0xff7c94b6),
+                      image: DecorationImage(
+                        image: NetworkImage(todo['urlToImage']),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+                Center(
+                  child: Container(
+                    height: 180,
+                    margin: const EdgeInsets.all(20),
+                    child: Column(
+                      children: [
+                        Text(
+                            todo['description'],
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal
+                            )
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
