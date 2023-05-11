@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hiv_tracker/screens/sign_in_page.dart';
+import 'package:hiv_tracker/screens/sign_up_page.dart';
 
 import '../common/constants.dart';
 
@@ -65,7 +66,7 @@ class _StartState extends State<Start> {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const SignUp()),
+                            MaterialPageRoute(builder: (context) => const SignIn()),
                           );
                         },
                         child: const Text(

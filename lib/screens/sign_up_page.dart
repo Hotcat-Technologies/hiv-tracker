@@ -1,31 +1,33 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hiv_tracker/screens/sign_up_page.dart';
-import 'package:hiv_tracker/screens/welcome_page.dart';
+import 'package:hiv_tracker/authentication/auth.dart';
+import 'package:hiv_tracker/screens/sign_in_page.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
-
-
+import 'package:hiv_tracker/screens/welcome_page.dart';
+//import 'package:firebase_auth_project/auth.dart';
 import '../authentication/auth.dart';
+
 import '../common/constants.dart';
 
-class SignIn extends StatefulWidget {
-  const SignIn({Key? key}) : super(key: key);
+class SignUp extends StatefulWidget {
+  const SignUp({Key? key}) : super(key: key);
 
   @override
-  State<SignIn> createState() => _SignInState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _SignInState extends State<SignIn> {
+class _SignUpState extends State<SignUp> {
 
   String? errors = '';
 
   final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controllerPassword = TextEditingController();
+  final TextEditingController _controllerConfirmPassword = TextEditingController();
 
-  Future<void> signInWithEmailAndPassword () async {
+  Future<void> createUserWithEmailAndPassword () async {
     try {
-      await Auth().signInWithEmailAndPassword(
+      await Auth().createUserWithEmailAndPassword(
         email: _controllerEmail.text,
         password: _controllerPassword.text,
       );
@@ -131,6 +133,33 @@ class _SignInState extends State<SignIn> {
               ),
               Column(
                 children: [
+                  Container(
+                    width: 300,
+                    margin: const EdgeInsets.all(20),
+                    child: Column(
+                      children: [
+                        TextField(
+                          controller: _controllerConfirmPassword,
+                          obscureText: true,
+                          decoration: const InputDecoration(
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: textFieldStyle,
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: textFieldStyle,
+                            ),
+                            hintText: 'Confirm Password',
+                            hintStyle: textFieldColor,
+                          ),
+                          style: textFieldColor,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                children: [
                   SizedBox(
                     width: 300,
                     height: 36,
@@ -145,12 +174,28 @@ class _SignInState extends State<SignIn> {
                 ],
               ),
               Column(
+                children: const [
+                  SizedBox(
+                    width: 300,
+                    child: Text(
+                        'By signing up you accept the Terms of Use and Privacy Policy',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold
+                        ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
+              ),
+              Column(
                 children: [
                   Center(
                     child: Container(
                       height: 60,
                       width: 200,
-                      margin: const EdgeInsets.all(90),
+                      margin: const EdgeInsets.all(30),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
@@ -159,10 +204,12 @@ class _SignInState extends State<SignIn> {
                           ),
                         ),
                         onPressed: () {
-                          signInWithEmailAndPassword();
+                          if (_controllerPassword.text == _controllerConfirmPassword.text) {
+                            createUserWithEmailAndPassword();
+                          }
                         },
                         child: const Text(
-                          'Sign In',
+                          'Sign Up',
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 16,
@@ -177,11 +224,11 @@ class _SignInState extends State<SignIn> {
                 children: [
                   Center(
                     child: SizedBox(
-                      width: 160,
+                      width: 230,
                       child: Row(
                         children: [
                           const Text(
-                              'I’m a new user  ',
+                              'Already have an account?  ',
                               style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.normal
@@ -189,7 +236,7 @@ class _SignInState extends State<SignIn> {
                           ),
                           InkWell(
                             child: const Text(
-                                'Sign Up',
+                                'Sign In',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 14,
@@ -200,7 +247,7 @@ class _SignInState extends State<SignIn> {
                             onTap: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => const SignUp()),
+                                MaterialPageRoute(builder: (context) => const SignIn()),
                               );
                             },
                           )
@@ -209,7 +256,7 @@ class _SignInState extends State<SignIn> {
                     ),
                   )
                 ],
-              )
+              ),
             ],
           ),
         ),

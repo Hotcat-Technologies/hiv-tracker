@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hiv_tracker/screens/sign_up_page.dart';
 import 'package:hiv_tracker/screens/start_page.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
