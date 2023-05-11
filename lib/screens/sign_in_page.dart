@@ -41,7 +41,7 @@ class _SignInState extends State<SignIn> {
     setState(() {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const Welcome()),
+        MaterialPageRoute(builder: (context) => Welcome(email : _controllerEmail.text,)),
       );
     });
   }

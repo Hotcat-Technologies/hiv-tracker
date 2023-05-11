@@ -6,13 +6,19 @@ import 'package:hiv_tracker/screens/explore_articles_page.dart';
 import 'package:hiv_tracker/screens/healthcare_contacts_page.dart';
 
 class Welcome extends StatefulWidget {
-  const Welcome({Key? key}) : super(key: key);
+
+  String email;
+  Welcome({Key? key, required this.email}) : super(key: key);
 
   @override
-  State<Welcome> createState() => _WelcomeState();
+  State<Welcome> createState() => _WelcomeState(email: email);
 }
 
 class _WelcomeState extends State<Welcome> {
+
+  String email;
+  _WelcomeState({required this.email});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,7 +78,7 @@ class _WelcomeState extends State<Welcome> {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const ConnectWithOthers()),
+                            MaterialPageRoute(builder: (context) => ConnectWithOthers(email: email,)),
                           );
                         },
                         child: const Text(

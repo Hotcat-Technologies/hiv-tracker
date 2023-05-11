@@ -43,7 +43,7 @@ class _SignUpState extends State<SignUp> {
     setState(() {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const Welcome()),
+        MaterialPageRoute(builder: (context) => Welcome(email: _controllerEmail.text,)),
       );
     });
   }
